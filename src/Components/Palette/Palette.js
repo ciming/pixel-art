@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import colors from './colors'
 import PaletteItem from './PaletteItem'
-
 class Platette extends Component {
   constructor(props) {
     super(props)
@@ -11,11 +10,11 @@ class Platette extends Component {
   }
   render() {
     return (
-      <div class="palette">
+      <div className="palette">
         {
-          colors.map(color => {
+          colors.map((color, index) => {
             return (
-              <PaletteItem color={color}></PaletteItem>
+              <PaletteItem key={index} color={color}/>
             )
           })
         }

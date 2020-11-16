@@ -15,5 +15,5 @@ const actions = ({ setState, getState }) => ({
 
 export const Store = createStore(initialState, actions);
 
-export const useStore = createHooks(Store);
+export const useGlobal = createHooks(Store);
 
