@@ -1,25 +1,27 @@
 
 import './App.css';
+import Platette from './Components/Palette/Palette'
 
 function App() {
   return (
     <div className="App">
       <div class="row">
         <div class="col-md-12">
-        dsadas
+          
         </div>
       </div>
       <div class="row">
         <div class="col-md-3">
-            qw
+          <div class="app-module">
+            <Platette/>
           </div>
-          <div class="col-md-6">
-            wqw
-          </div>
-          <div class="col-md-3">
-            wqw
-          </div>
-          
+        </div>
+        <div class="col-md-6">
+          wqw
+        </div>
+        <div class="col-md-3">
+          wqw
+        </div>
       </div>
     </div>
   );

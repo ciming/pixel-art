@@ -1,0 +1,13 @@
+.palette{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 5px;
+  &__item{
+    appearance: none;
+    border: none;
+    padding-bottom: 100%;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+  }
+}
