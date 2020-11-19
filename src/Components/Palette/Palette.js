@@ -1,20 +1,29 @@
 import {Component} from 'react'
-import colors from './colors'
+import {connect} from 'react-redux';
 import PaletteItem from './PaletteItem'
-class Platette extends Component {
-  constructor(props) {
-    super(props)
-    this.states = {
+import {setCurrentColorIndex} from '@store/currentColorIndex'
 
-    }
-  }
+@connect(
+  state => ({
+    colorList: state.colorList,
+    currentColorIndex: state.currentColorIndex
+  })
+)
+class Platette extends Component {
   render() {
     return (
       <div className="palette">
         {
-          colors.map((color, index) => {
+          this.props.colorList.map((color, index) => {
             return (
-              <PaletteItem key={index} color={color}/>
+              <PaletteItem 
+                key={index} 
+                isSelect={this.props.currentColorIndex === index} 
+                onClick={() => {
+                  this.props.dispatch(setCurrentColorIndex(index))
+                }}
+                color={color}>
+              </PaletteItem>
             )
           })
         }

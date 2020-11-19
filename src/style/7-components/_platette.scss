@@ -9,5 +9,8 @@
     box-sizing: border-box;
     outline: none;
     cursor: pointer;
+    &.is-active{
+      box-shadow: 0 0 0 2px #fff inset;
+    }
   }
 }

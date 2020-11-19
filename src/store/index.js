@@ -1,14 +1,16 @@
 import { createStore, createHooks } from "react-global-hook"
-
+import colors from './colors'
 const initialState = {
-  currentColor: null,
-  pixelData: []
+  currentColorIndex: 0,
+  pixelData: [],
+  colors
 }
 
 const actions = ({ setState, getState }) => ({
-  setCurrentColor(color) {
+  setCurrentColor(index) {
+    console.log(index);
     setState({
-      currentColor: color
+      currentColorIndex: index
     })
   }
 })
