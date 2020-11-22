@@ -14,6 +14,7 @@
     "react-global-hook": "^2.0.0-rc2",
     "react-redux": "^7.2.2",
     "react-scripts": "4.0.0",
+    "react-svg": "^11.1.1",
     "redux": "^4.0.5",
     "web-vitals": "^0.2.4"
   },

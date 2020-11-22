@@ -1,0 +1,21 @@
+.app-tools{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  font-size: 1.8em;
+  &__item{
+    text-align: center;
+    padding: .4em 0;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover{
+      background-color: #313131;
+      color: #fff;
+    }
+  }
+  .icon{
+    width: 1em;
+    height: 1em;
+    fill:currentColor
+  }
+}
