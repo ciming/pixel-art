@@ -8,7 +8,6 @@ const initialState = {
 
 const actions = ({ setState, getState }) => ({
   setCurrentColor(index) {
-    console.log(index);
     setState({
       currentColorIndex: index
     })

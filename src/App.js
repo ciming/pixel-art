@@ -1,7 +1,7 @@
 
 import './App.css';
 import Platette from '@components/Palette/Palette'
-import ColorPicker from '@components/ColorPicker/ColorPicker'
+import ToolPalette from '@components/ToolPalette/ToolPalette'
 function App() {
   return (
       <div className="App">
@@ -13,11 +13,7 @@ function App() {
         <div className="row">
           <div className="col-md-2">
             <div className="app-module">
-              <div className="app-tools">
-                <div className="app-tools__item">
-                  <ColorPicker/>
-                </div>
-              </div>
+              <ToolPalette/>
             </div>
             <div className="app-module">
             <Platette/>

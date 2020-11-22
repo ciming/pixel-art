@@ -8,7 +8,7 @@
     padding: .4em 0;
     cursor: pointer;
     transition: all .3s;
-    &:hover{
+    &.is-active{
       background-color: #313131;
       color: #fff;
     }

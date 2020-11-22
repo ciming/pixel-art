@@ -6,4 +6,7 @@
 './6-skeleton/module';
 
 @import './7-components/platette', 
-  './7-components/tools.scss';
+  './7-components/tools.scss',
+  './7-components/color-picker.scss';
+
+@import './8-Utilities/visible.scss';

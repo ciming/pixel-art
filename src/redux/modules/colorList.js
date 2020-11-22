@@ -4,5 +4,24 @@ const colorList = ["rgb(0, 0, 0)", "rgb(255, 0, 0)", "rgb(233, 30, 99)", "rgb(15
 const initialState = colorList;
 
 export default function reducer(state = initialState, action = {}) {
-  return state
+  switch (action.type) {
+    case 'CHANGE_COLOR_ITEM':
+      return action.getState(state)
+    default:
+      return state
+  }
+  
+}
+
+export const changeColor = (index, value) => {
+  return {
+    type: 'CHANGE_COLOR_ITEM',
+    getState(state) {
+      return [
+        ...state.slice(0, index),
+        value,
+        ...state.slice(index + 1),
+      ]
+    }
+  }
 }
