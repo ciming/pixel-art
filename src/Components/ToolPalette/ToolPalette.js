@@ -1,6 +1,6 @@
 import {Component, createRef} from 'react'
 import {connect} from 'react-redux';
-import ColorPicker from '@components/ColorPicker/ColorPicker'
+import ColorPicker from './ColorPicker'
 import classnames from 'classnames'
 import {setCurrentToolState} from '@store/toolStatus.js'
 
