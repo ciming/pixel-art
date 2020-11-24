@@ -29,7 +29,11 @@ class ColorPicker extends Component{
       <div className="color-picker">
         <Icon icon="pen"/>
         <div onClick={(e)=>{e.stopPropagation()}} >
-        <SketchPicker className={className} color={this.props.colorList[this.props.currentColorIndex === null ? -1 : this.props.currentColorIndex]} onChangeComplete={this.colorChange}></SketchPicker>
+        <SketchPicker 
+          className={className} 
+          color={this.props.colorList[this.props.currentColorIndex === null ? -1 : this.props.currentColorIndex]} 
+          onChangeComplete={this.colorChange}
+          ></SketchPicker>
         </div>
       </div>
     )

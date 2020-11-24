@@ -1,14 +1,31 @@
 
+import {Component} from 'react'
 
-function PixelItem(props) {
-  const domStyle = {
-    color: 'white',
-    backgroundColor: props.color || 'rgb(49, 49, 49)'
+class PixelItem extends Component{
+  constructor() {
+    super()
+    this.state = {}
   }
-  return (
-    <div className="pixel-canvas__item" style={domStyle}>
-    </div>
-  )
+  render() {
+    const domStyle = {
+      color: 'white',
+      backgroundColor: this.props.color || 'rgb(49, 49, 49)'
+    }
+    return (
+      <div 
+        className="pixel-canvas__item"  
+        style={domStyle}
+        onMouseDown={() => {this.props.onFill()}}
+        onMouseEnter={this.handleMouseEnter}
+        >
+      </div>
+    )
+  }
+  // 鼠标移入事件
+  handleMouseEnter(evt) {
+
+  }
 }
+
 
 export default PixelItem

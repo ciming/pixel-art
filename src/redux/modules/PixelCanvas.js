@@ -10,7 +10,30 @@ for(let i = 0; i < initialState.rowLength; i ++) {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case 'DRAW_PIXEL':
+      return action.draw(state)
     default:
       return state
+  }
+}
+
+// 
+export const drawPixel = (color, x, y) => {
+  return {
+    type: 'DRAW_PIXEL',
+    draw(state) {
+      const {canvas} = state
+      return {
+        ...state,
+        canvas: canvas.map((innerArray, yIndex) => {
+          return innerArray.map((item, xIndex) => {
+            if(xIndex === x & yIndex === y) {
+              return color
+            }
+            return item
+          }) 
+        })
+      }
+    }
   }
 }
