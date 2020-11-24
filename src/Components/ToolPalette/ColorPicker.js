@@ -28,7 +28,9 @@ class ColorPicker extends Component{
     return (
       <div className="color-picker">
         <Icon icon="pen"/>
-        <SketchPicker className={className} color={this.props.colorList[this.props.currentColorIndex === null ? -1 : this.props.currentColorIndex]} onChange={this.colorChange}></SketchPicker>
+        <div onClick={(e)=>{e.stopPropagation()}} >
+        <SketchPicker className={className} color={this.props.colorList[this.props.currentColorIndex === null ? -1 : this.props.currentColorIndex]} onChangeComplete={this.colorChange}></SketchPicker>
+        </div>
       </div>
     )
   }
@@ -36,7 +38,6 @@ class ColorPicker extends Component{
     if(this.props.currentColorIndex === null) {
       this.props.dispatch(setCurrentColorIndex(this.props.colorList.length - 1))
     }
-    console.log(color);
     this.props.dispatch(changeColor(this.props.currentColorIndex, `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b},${color.rgb.a})`))
   }
 }
