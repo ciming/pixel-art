@@ -8,7 +8,8 @@ const { override, addWebpackAlias, babelInclude, addBabelPlugin} = require('cust
 module.exports = override(
   addWebpackAlias({
     "@store": path.resolve("src/redux/modules"),
-    "@components": path.resolve("src/Components")
+    "@components": path.resolve("src/Components"),
+    "@utils": path.resolve("src/Utils")
   }),
   addBabelPlugin(["@babel/plugin-proposal-decorators", { "legacy": true }]),
   babelInclude([

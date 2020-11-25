@@ -1,10 +1,11 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
 // import PixelItem from './PixelItem'
-import {drawPixel} from '@store/PixelCanvas'
+import {setColor, fillColor} from '@store/PixelCanvas'
 
 @connect(
   state => ({
+    toolStatus: state.toolStatus,
     rowLength: state.PixelCanvas.rowLength,
     colLength: state.PixelCanvas.colLength,
     canvas: state.PixelCanvas.canvas,
@@ -19,8 +20,15 @@ class PixelCanvas extends Component{
     this.fillColor = this.fillColor.bind(this)
   }
   render() {
+    const cursorDict = {
+      fill: 'crosshair',
+      eyedropper: 'copy',
+      eraser: 'context-menu',
+      move: 'move'
+    }
     const domStyle = {
-      gridTemplateColumns: `repeat(${this.props.colLength}, 1fr)`
+      gridTemplateColumns: `repeat(${this.props.colLength}, 1fr)`,
+      cursor: cursorDict[this.props.toolStatus] || 'crosshair'
     }
     return (
       <div className="pixel-canvas" style={domStyle}>
@@ -47,12 +55,24 @@ class PixelCanvas extends Component{
   // 鼠标点击事件
   onMouseDown(x, y) {
     this.isMouseDown = true
-    this.fillColor(x, y)
+    if(this.props.toolStatus === 'fill') {
+      this.fillColor(x, y)
+    } else if(this.props.toolStatus === 'eraser') {
+      this.clearColor(x, y)
+    } else {
+      this.setColor(x, y)
+    }
+    
   }
   // 鼠标移入事件
   onMouseEnter(x, y) {
-    if(this.isMouseDown) {
+    if(!this.isMouseDown) return
+    if(this.props.toolStatus === 'fill') {
       this.fillColor(x, y)
+    } else if(this.props.toolStatus === 'eraser') {
+      this.clearColor(x, y)
+    } else {
+      this.setColor(x, y)
     }
   }
   // 鼠标松开事件
@@ -60,10 +80,19 @@ class PixelCanvas extends Component{
     this.isMouseDown = false
   }
   onMouseUp
-  // 填充颜色
-  fillColor(x, y) {
+  // 设置颜色
+  setColor(x, y) {
     const color = this.props.colorList[this.props.currentColorIndex] 
-    this.props.dispatch(drawPixel(color, x,y))
+    this.props.dispatch(setColor(color, x,y))
+  }
+  // 填充颜色
+  fillColor(x, y){
+    const color = this.props.colorList[this.props.currentColorIndex] 
+    this.props.dispatch(fillColor(color, x,y))
+  }
+  // 清除颜色
+  clearColor(x, y) {
+    this.props.dispatch(setColor(null, x,y))
   }
 }
 

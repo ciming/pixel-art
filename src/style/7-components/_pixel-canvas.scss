@@ -1,8 +1,9 @@
 .pixel-canvas{
   display: grid;
-  grid-gap: 2px;
-
+  cursor: crosshair;
   &__item{
+    border: 1px solid #585858;
     padding-bottom: 100%;
   }
+
 }
