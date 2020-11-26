@@ -1,7 +1,10 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
 // import PixelItem from './PixelItem'
-import {setColor, fillColor} from '@store/PixelCanvas'
+import {setColor, fillColor, move} from '@store/PixelCanvas'
+import {setCurrentColorIndex} from '@store/currentColorIndex'
+import {setCurrentToolState} from '@store/toolStatus.js'
+import {changeColor} from '@store/colorList.js'
 
 @connect(
   state => ({
@@ -17,6 +20,8 @@ class PixelCanvas extends Component{
   constructor() {
     super()
     this.isMouseDown = false
+    this.startX = 0
+    this.startY = 0
     this.fillColor = this.fillColor.bind(this)
   }
   render() {
@@ -31,7 +36,7 @@ class PixelCanvas extends Component{
       cursor: cursorDict[this.props.toolStatus] || 'crosshair'
     }
     return (
-      <div className="pixel-canvas" style={domStyle}>
+      <div className="pixel-canvas" style={domStyle} onMouseLeave={() => {this.isMouseDown = false}}>
         {
           this.props.canvas.map((row, yIndex) => {
             return row.map((color, xIndex)=> {
@@ -40,8 +45,8 @@ class PixelCanvas extends Component{
                   className="pixel-canvas__item" 
                   key={`${xIndex}-${yIndex}`}  
                   style={{backgroundColor: color || 'rgb(49, 49, 49)'}}
-                  onMouseDown={() => {this.onMouseDown(xIndex, yIndex)}}
-                  onMouseEnter={() => {this.onMouseEnter(xIndex, yIndex)}}
+                  onMouseDown={() => {this.onMouseDown(xIndex, yIndex, color)}}
+                  onMouseEnter={() => {this.onMouseEnter(xIndex, yIndex, color)}}
                   onMouseUp={() => {this.onMouseUp()}}
                   >
                 </div>
@@ -53,12 +58,17 @@ class PixelCanvas extends Component{
     )
   }
   // 鼠标点击事件
-  onMouseDown(x, y) {
+  onMouseDown(x, y, color) {
     this.isMouseDown = true
     if(this.props.toolStatus === 'fill') {
       this.fillColor(x, y)
     } else if(this.props.toolStatus === 'eraser') {
       this.clearColor(x, y)
+    } else if(this.props.toolStatus === 'eyedropper' & color !== null) {
+      this.absorbColor(color)
+    } else if(this.props.toolStatus === 'move') {
+      this.startX = x
+      this.startY = y
     } else {
       this.setColor(x, y)
     }
@@ -71,9 +81,11 @@ class PixelCanvas extends Component{
       this.fillColor(x, y)
     } else if(this.props.toolStatus === 'eraser') {
       this.clearColor(x, y)
+    } else if(this.props.toolStatus === 'move') {
+      this.move(x, y)
     } else {
       this.setColor(x, y)
-    }
+    } 
   }
   // 鼠标松开事件
   onMouseUp(x, y) {
@@ -93,6 +105,32 @@ class PixelCanvas extends Component{
   // 清除颜色
   clearColor(x, y) {
     this.props.dispatch(setColor(null, x,y))
+  }
+  // 吸取颜色
+  absorbColor(color) {
+    const colorIndex = this.props.colorList.findIndex(item => item === color)
+    if(colorIndex >= 0) {
+      this.props.dispatch(setCurrentColorIndex(colorIndex))
+    } else {
+      this.props.dispatch(setCurrentColorIndex(this.props.colorList.length - 1))
+      this.props.dispatch(changeColor(this.props.colorList.length - 1, color))
+    }
+    this.props.dispatch(setCurrentToolState(null))
+    
+  }
+  /**
+   * 移动像素画
+   * @time 2020年11月27日 06:57:02 星期五
+   * @param {Number} x - 鼠标经过的X轴
+   * @param {Number} y - 鼠标经过的Y轴
+   */
+  move(x, y) {
+    const offsetX = x - this.startX
+    const OffsetY = y - this.startY
+    console.log(offsetX, OffsetY);
+    this.props.dispatch(move(offsetX, OffsetY))
+    this.startX = x
+    this.startY = y
   }
 }
 

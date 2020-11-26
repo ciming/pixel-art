@@ -14,6 +14,8 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'DRAW_PIXEL':
       return action.draw(state)
+    case 'MOVE_PIXEL':
+      return action.draw(state)
     default:
       return state
   }
@@ -85,13 +87,40 @@ export const fillColor = (color, x, y) => {
   }
 }
 
-// 清除颜色
 
-export const clearColor = (x, y) => {
+/**
+ * 移动
+ * @time 2020年11月27日 07:00:40 星期五
+ * @param {Number} xOffset - X轴偏移量
+ * @param {Number} YOffset - Y轴偏移量
+ */
+
+export const move = (offsetX, offsetY) => {
   return {
-    type: 'DRAW_PIXEL',
+    type: 'MOVE_PIXEL',
     draw(state) {
-
+      const {canvas} = state
+      const canvasClone = clone2DArray(canvas)
+      if(offsetX > 0 ) {
+        for(let i = 0; i < canvasClone.length; i++) {
+          canvasClone[i].splice(0, 0, canvasClone[i].pop())
+        }
+      }
+      if(offsetX < 0 ) {
+        for(let i = 0; i < canvasClone.length; i++) {
+          canvasClone[i].push(canvasClone[i].shift())
+        }
+      }
+      if(offsetY > 0){
+        canvasClone.splice(0, 0, canvasClone.pop())
+      }
+      if(offsetY < 0){
+        canvasClone.push(canvasClone.shift())
+      }
+      return {
+        ...state,
+        canvas: canvasClone
+      }
     }
   }
 }
