@@ -2,7 +2,8 @@
   display: grid;
   cursor: crosshair;
   &__item{
-    border: 1px solid #585858;
+    border-left: 1px solid #585858;
+    border-bottom: 1px solid #585858;
     padding-bottom: 100%;
   }
 

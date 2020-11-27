@@ -16,6 +16,8 @@ export default function reducer(state = initialState, action = {}) {
       return action.draw(state)
     case 'MOVE_PIXEL':
       return action.draw(state)
+    case 'CHANGE_DIMENSIONS': 
+      return action.draw(state)
     default:
       return state
   }
@@ -119,6 +121,68 @@ export const move = (offsetX, offsetY) => {
       }
       return {
         ...state,
+        canvas: canvasClone
+      }
+    }
+  }
+}
+
+/**
+ * 更改列尺寸
+ * @author 徐步星 <869313979@qq.com>
+ * @time 2020年11月28日 06:57:11 星期六
+ * @param {*} param - 任意类型参数
+ */
+export const changeColSize = (type) => {
+  return {
+    type: 'CHANGE_DIMENSIONS',
+    draw(state) {
+      let {canvas, colLength} = state
+      const canvasClone = clone2DArray(canvas)
+      if(type === 'add') {
+        colLength += 1
+        for (let i = 0; i < canvasClone.length; i++) {
+          const innerArray = canvasClone[i];
+          innerArray.push(null)
+        }
+      } else if(type === 'remove') {
+        colLength -= 1
+        for (let i = 0; i < canvasClone.length; i++) {
+          const innerArray = canvasClone[i];
+          innerArray.pop()
+        }
+       
+      }
+      return {
+        ...state,
+        colLength,
+        canvas: canvasClone
+      }
+    }
+  }
+}
+/**
+ * 更改行尺寸
+ * @author 徐步星 <869313979@qq.com>
+ * @time 2020年11月28日 06:57:11 星期六
+ * @param {*} param - 任意类型参数
+ */
+export const changeRowSize = (type) => {
+  return {
+    type: 'CHANGE_DIMENSIONS',
+    draw(state) {
+      let {canvas, colLength, rowLength} = state
+      const canvasClone = clone2DArray(canvas)
+      if(type === 'add') {
+        rowLength += 1
+        canvasClone.push(Array(colLength).fill(null))
+      } else if(type === 'remove') {
+        rowLength -= 1
+        canvasClone.pop()
+      }
+      return {
+        ...state,
+        rowLength,
         canvas: canvasClone
       }
     }

@@ -3,6 +3,7 @@ import './App.css';
 import Platette from '@components/Palette/Palette'
 import ToolPalette from '@components/ToolPalette/ToolPalette'
 import PixelCanvas from '@components/PixelCanvas/PixelCanvas'
+import Dimensions from '@components/Dimensions/Dimensions'
 function App() {
   return (
       <div className="App">
@@ -23,8 +24,10 @@ function App() {
           <div className="col-md-5">
             <PixelCanvas/>
           </div>
-          <div className="col-md-3">
-            
+          <div className="col-md-2">
+            <div className="app-module">
+              <Dimensions/>
+            </div>
           </div>
         </div>
       </div>

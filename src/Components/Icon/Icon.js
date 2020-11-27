@@ -6,6 +6,8 @@ import { ReactComponent as FillIcon } from "../../Icons/fill.svg";
 import { ReactComponent as EyedropperIcon } from "../../Icons/eyedropper.svg";
 import { ReactComponent as EraserIcon } from "../../Icons/eraser.svg";
 import { ReactComponent as MoveIcon } from "../../Icons/move.svg";
+import { ReactComponent as UpDownIcon } from "../../Icons/arrow-up-down.svg";
+import { ReactComponent as LeftRightIcon } from "../../Icons/arrow-left-right.svg";
 
 
 const Parse = ({ icon, props }) => {
@@ -15,6 +17,8 @@ const Parse = ({ icon, props }) => {
     case "eyedropper": return <EyedropperIcon {...props} />;
     case "eraser": return <EraserIcon {...props} />;
     case "move": return <MoveIcon {...props} />;
+    case "up-down": return <UpDownIcon {...props} />;
+    case "left-right": return <LeftRightIcon {...props} />;
     default: return <span>Icon</span>; // or some icon default
   }
 };

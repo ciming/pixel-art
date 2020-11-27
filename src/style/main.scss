@@ -2,12 +2,16 @@
 
 @import './4-generic/normalize';
 
+@import './5-elements/icon';
+
 @import './6-skeleton/flexboxgrid',
 './6-skeleton/module';
 
 @import './7-components/platette', 
   './7-components/tools.scss',
   './7-components/color-picker.scss',
-  './7-components/pixel-canvas.scss';
+  './7-components/pixel-canvas.scss',
+  './7-components/dimensions',
+  './7-components/number-input';
 
 @import './8-Utilities/visible.scss';
