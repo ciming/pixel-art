@@ -5,18 +5,22 @@ const initialState = {
   colLength: 20,
   canvas: []
 }
-// 根据长宽高创建像素画
-for(let i = 0; i < initialState.rowLength; i ++) {
-  initialState.canvas.push(Array(initialState.colLength).fill(null))
+
+const renderCanvas = (rowLength, colLength) => {
+  const canvas = []
+  for(let i = 0; i < rowLength; i ++) {
+    canvas.push(Array(colLength).fill(null))
+  }
+  return canvas
 }
+
+initialState.canvas = renderCanvas(initialState.rowLength, initialState.colLength)
+// 根据长宽高创建像素画
+
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'DRAW_PIXEL':
-      return action.draw(state)
-    case 'MOVE_PIXEL':
-      return action.draw(state)
-    case 'CHANGE_DIMENSIONS': 
       return action.draw(state)
     default:
       return state
@@ -99,7 +103,7 @@ export const fillColor = (color, x, y) => {
 
 export const move = (offsetX, offsetY) => {
   return {
-    type: 'MOVE_PIXEL',
+    type: 'DRAW_PIXEL',
     draw(state) {
       const {canvas} = state
       const canvasClone = clone2DArray(canvas)
@@ -135,7 +139,7 @@ export const move = (offsetX, offsetY) => {
  */
 export const changeColSize = (type) => {
   return {
-    type: 'CHANGE_DIMENSIONS',
+    type: 'DRAW_PIXEL',
     draw(state) {
       let {canvas, colLength} = state
       const canvasClone = clone2DArray(canvas)
@@ -169,7 +173,7 @@ export const changeColSize = (type) => {
  */
 export const changeRowSize = (type) => {
   return {
-    type: 'CHANGE_DIMENSIONS',
+    type: 'DRAW_PIXEL',
     draw(state) {
       let {canvas, colLength, rowLength} = state
       const canvasClone = clone2DArray(canvas)
@@ -184,6 +188,24 @@ export const changeRowSize = (type) => {
         ...state,
         rowLength,
         canvas: canvasClone
+      }
+    }
+  }
+}
+
+/**
+ * 新建画布
+ * @time 2020年11月29日 10:02:17 星期天
+ */
+
+export const newCanvas = () => {
+  return {
+    type: 'DRAW_PIXEL',
+    draw(state) {
+      let {colLength, rowLength} = state
+      return {
+        ...state,
+        canvas: renderCanvas(rowLength, colLength)
       }
     }
   }

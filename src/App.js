@@ -4,6 +4,7 @@ import Platette from '@components/Palette/Palette'
 import ToolPalette from '@components/ToolPalette/ToolPalette'
 import PixelCanvas from '@components/PixelCanvas/PixelCanvas'
 import Dimensions from '@components/Dimensions/Dimensions'
+import Menu from '@components/Menu/Menu'
 function App() {
   return (
       <div className="App">
@@ -16,6 +17,9 @@ function App() {
           <div className="col-md-3">
             <div className="row">
               <div className="col-md-6">
+                <div className="app-module">
+                  <Menu/>
+                </div>
                 <div className="app-module">
                   <ToolPalette/>
                 </div>
