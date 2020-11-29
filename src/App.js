@@ -13,21 +13,31 @@ function App() {
           </div>
         </div>
         <div className="row between-md">
-          <div className="col-md-2">
-            <div className="app-module">
-              <ToolPalette/>
+          <div className="col-md-3">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="app-module">
+                  <ToolPalette/>
+                </div>
+                <div className="app-module">
+                  <Platette/>
+                </div>
+              </div>
             </div>
-            <div className="app-module">
-            <Platette/>
-            </div>
+            
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <PixelCanvas/>
           </div>
-          <div className="col-md-2">
-            <div className="app-module">
-              <Dimensions/>
+          <div className="col-md-3 ">
+            <div className="row end-md">
+              <div className="col-md-6">
+                <div className="app-module">
+                  <Dimensions/>
+                </div>
+              </div>
             </div>
+            
           </div>
         </div>
       </div>
