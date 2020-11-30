@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
 import PaletteItem from './PaletteItem'
-import {setCurrentColorIndex} from '@store/currentColorIndex'
+import {setCurrentColorIndex} from '@store/modules/currentColorIndex'
 
 @connect(
   state => ({

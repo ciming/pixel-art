@@ -30,7 +30,7 @@ function App() {
             </div>
             
           </div>
-          <div className="col-md-6">
+          <div className="col-md-5">
             <PixelCanvas/>
           </div>
           <div className="col-md-3 ">

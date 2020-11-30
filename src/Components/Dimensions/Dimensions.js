@@ -2,12 +2,13 @@ import {Component} from 'react'
 import Icon from '@components/Icon/Icon'
 import NumberInput from './NumberInput'
 import {connect} from 'react-redux';
-import {changeColSize, changeRowSize} from '@store/PixelCanvas'
+import {changeColSize, changeRowSize, addHistory} from '@store/modules//pixelCanvas'
 
 @connect(
   state => ({
-    rowLength: state.PixelCanvas.rowLength,
-    colLength: state.PixelCanvas.colLength,
+    pixelCanvas: state.pixelCanvas.present,
+    rowLength: state.pixelCanvas.present.rowLength,
+    colLength: state.pixelCanvas.present.colLength,
   })
 )
 class Dimensions extends Component {
@@ -44,7 +45,7 @@ class Dimensions extends Component {
    * @param {Strignt} type - 操作类型
    */
   colChange(type) {
-    console.log(type);
+    this.props.dispatch(addHistory(this.props.pixelCanvas))
     this.props.dispatch(changeColSize(type))
   }
   /**
@@ -53,6 +54,7 @@ class Dimensions extends Component {
    * @param {Strignt} type - 操作类型
    */
   rowChange(type) {
+    this.props.dispatch(addHistory(this.props.pixelCanvas))
     this.props.dispatch(changeRowSize(type))
   }
 }

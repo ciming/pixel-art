@@ -3,8 +3,8 @@ import Icon from '@components/Icon/Icon'
 import {connect} from 'react-redux';
 import { SketchPicker } from 'react-color';
 import classnames from 'classnames'
-import {setCurrentColorIndex} from '@store/currentColorIndex'
-import {changeColor} from '@store/colorList.js'
+import {setCurrentColorIndex} from '@store/modules/currentColorIndex'
+import {changeColor} from '@store/modules/colorList.js'
 @connect(
   state => ({
     toolStatus: state.toolStatus,

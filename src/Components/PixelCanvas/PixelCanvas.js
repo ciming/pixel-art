@@ -1,28 +1,29 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
 // import PixelItem from './PixelItem'
-import {setColor, fillColor, move} from '@store/PixelCanvas'
-import {setCurrentColorIndex} from '@store/currentColorIndex'
-import {setCurrentToolState} from '@store/toolStatus.js'
-import {changeColor} from '@store/colorList.js'
+import {setColor, fillColor, move, addHistory} from '@store/modules/pixelCanvas'
+import {setCurrentColorIndex} from '@store/modules/currentColorIndex'
+import {setCurrentToolState} from '@store/modules/toolStatus.js'
+import {changeColor} from '@store/modules/colorList.js'
 
 @connect(
   state => ({
+    pixelCanvas: state.pixelCanvas.present,
     toolStatus: state.toolStatus,
-    rowLength: state.PixelCanvas.rowLength,
-    colLength: state.PixelCanvas.colLength,
-    canvas: state.PixelCanvas.canvas,
+    colLength: state.pixelCanvas.present.colLength,
+    canvas: state.pixelCanvas.present.canvas,
     colorList: state.colorList,
     currentColorIndex: state.currentColorIndex
   })
 )
-class PixelCanvas extends Component{
-  constructor() {
-    super()
+class pixelCanvas extends Component{
+  constructor(props) {
+    super(props)
     this.isMouseDown = false
     this.startX = 0
     this.startY = 0
     this.fillColor = this.fillColor.bind(this)
+    // 初始化历史记录
   }
   render() {
     const cursorDict = {
@@ -61,15 +62,19 @@ class PixelCanvas extends Component{
   onMouseDown(x, y, color) {
     this.isMouseDown = true
     if(this.props.toolStatus === 'fill') {
+      this.props.dispatch(addHistory(this.props.pixelCanvas))
       this.fillColor(x, y)
     } else if(this.props.toolStatus === 'eraser') {
+      this.props.dispatch(addHistory(this.props.pixelCanvas))
       this.clearColor(x, y)
     } else if(this.props.toolStatus === 'eyedropper' & color !== null) {
       this.absorbColor(color)
     } else if(this.props.toolStatus === 'move') {
+      this.props.dispatch(addHistory(this.props.pixelCanvas))
       this.startX = x
       this.startY = y
     } else {
+      this.props.dispatch(addHistory(this.props.pixelCanvas))
       this.setColor(x, y)
     }
     
@@ -134,4 +139,4 @@ class PixelCanvas extends Component{
   }
 }
 
-export default PixelCanvas
+export default pixelCanvas

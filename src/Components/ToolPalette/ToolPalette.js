@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import ColorPicker from './ColorPicker'
 import classnames from 'classnames'
 import Icon from '@components/Icon/Icon'
-import {setCurrentToolState} from '@store/toolStatus.js'
+import {setCurrentToolState} from '@store/modules/toolStatus.js'
 
 @connect(
   state => ({

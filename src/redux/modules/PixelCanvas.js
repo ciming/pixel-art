@@ -1,9 +1,13 @@
 import {clone2DArray} from '@utils'
 
 const initialState = {
-  rowLength: 20,
-  colLength: 20,
-  canvas: []
+  past: [],
+  present: {
+    rowLength: 20,
+    colLength: 20,
+    canvas: []
+  },
+  future: []
 }
 
 const renderCanvas = (rowLength, colLength) => {
@@ -14,16 +18,56 @@ const renderCanvas = (rowLength, colLength) => {
   return canvas
 }
 
-initialState.canvas = renderCanvas(initialState.rowLength, initialState.colLength)
+initialState.present.canvas = renderCanvas(initialState.present.rowLength, initialState.present.colLength)
 // 根据长宽高创建像素画
 
 
 export default function reducer(state = initialState, action = {}) {
+  const { past, present, future } = state
   switch (action.type) {
+    case 'NEW_CANVAS': 
+      return {
+        past: [],
+        present: action.draw(present),
+        future: []
+      }
     case 'DRAW_PIXEL':
-      return action.draw(state)
+      return {
+        ...state,
+        present: action.draw(present)
+      }
+    case 'ADD_HISTORY':
+      return {
+        ...state,
+        past: [...past, action.data],
+        future: []
+      }
+    case 'UNDO':
+      const previous = past[past.length - 1]
+      const newPast = past.slice(0, past.length - 1)
+      return {
+        past: newPast,
+        present: JSON.parse(previous),
+        future: [JSON.stringify(present), ...future]
+      }
+    case 'REDO':
+      const next = future[0]
+      const newFuture = future.slice(1)
+      return {
+        past: [...past, JSON.stringify(present)],
+        present: JSON.parse(next),
+        future: newFuture
+      }
     default:
       return state
+  }
+}
+
+// 重绘
+export const repaint = (data) => {
+  return {
+    type: 'REPAINT',
+    data: JSON.parse(data)
   }
 }
 
@@ -31,10 +75,10 @@ export default function reducer(state = initialState, action = {}) {
 export const setColor = (color, x, y) => {
   return {
     type: 'DRAW_PIXEL',
-    draw(state) {
-      const {canvas} = state
+    draw(present) {
+      const {canvas} = present
       return {
-        ...state,
+        ...present,
         canvas: canvas.map((innerArray, yIndex) => {
           return innerArray.map((item, xIndex) => {
             if(xIndex === x & yIndex === y) {
@@ -53,8 +97,8 @@ export const fillColor = (color, x, y) => {
  
   return {
     type: 'DRAW_PIXEL',
-    draw(state) {
-      const {canvas, rowLength, colLength} = state
+    draw(present) {
+      const {canvas, rowLength, colLength} = present
       const canvasClone = clone2DArray(canvas)
       const currentColor =  canvasClone[y][x]
       console.log(canvasClone);
@@ -79,7 +123,7 @@ export const fillColor = (color, x, y) => {
       }
       fill(x, y)
       return {
-        ...state,
+        ...present,
         canvas: canvasClone.map((innerArray, yIndex) => {
           return innerArray.map((item, xIndex) => {
             if(xIndex === x & yIndex === y) {
@@ -104,8 +148,8 @@ export const fillColor = (color, x, y) => {
 export const move = (offsetX, offsetY) => {
   return {
     type: 'DRAW_PIXEL',
-    draw(state) {
-      const {canvas} = state
+    draw(present) {
+      const {canvas} = present
       const canvasClone = clone2DArray(canvas)
       if(offsetX > 0 ) {
         for(let i = 0; i < canvasClone.length; i++) {
@@ -124,7 +168,7 @@ export const move = (offsetX, offsetY) => {
         canvasClone.push(canvasClone.shift())
       }
       return {
-        ...state,
+        ...present,
         canvas: canvasClone
       }
     }
@@ -140,8 +184,8 @@ export const move = (offsetX, offsetY) => {
 export const changeColSize = (type) => {
   return {
     type: 'DRAW_PIXEL',
-    draw(state) {
-      let {canvas, colLength} = state
+    draw(present) {
+      let {canvas, colLength} = present
       const canvasClone = clone2DArray(canvas)
       if(type === 'add') {
         colLength += 1
@@ -158,7 +202,7 @@ export const changeColSize = (type) => {
        
       }
       return {
-        ...state,
+        ...present,
         colLength,
         canvas: canvasClone
       }
@@ -174,8 +218,8 @@ export const changeColSize = (type) => {
 export const changeRowSize = (type) => {
   return {
     type: 'DRAW_PIXEL',
-    draw(state) {
-      let {canvas, colLength, rowLength} = state
+    draw(present) {
+      let {canvas, colLength, rowLength} = present
       const canvasClone = clone2DArray(canvas)
       if(type === 'add') {
         rowLength += 1
@@ -185,7 +229,7 @@ export const changeRowSize = (type) => {
         canvasClone.pop()
       }
       return {
-        ...state,
+        ...present,
         rowLength,
         canvas: canvasClone
       }
@@ -200,13 +244,32 @@ export const changeRowSize = (type) => {
 
 export const newCanvas = () => {
   return {
-    type: 'DRAW_PIXEL',
-    draw(state) {
-      let {colLength, rowLength} = state
+    type: 'NEW_CANVAS',
+    draw(present) {
+      let {colLength, rowLength} = present
       return {
-        ...state,
+        ...present,
         canvas: renderCanvas(rowLength, colLength)
       }
     }
+  }
+}
+// 添加历史
+export const addHistory = (data) => {
+  return {
+    type: 'ADD_HISTORY',
+    data: JSON.stringify(data)
+  }
+}
+
+export const undo = (data) => {
+  return {
+    type: 'UNDO',
+  }
+}
+
+export const redo = (data) => {
+  return {
+    type: 'REDO',
   }
 }
