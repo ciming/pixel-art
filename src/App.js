@@ -4,7 +4,10 @@ import Platette from '@components/Palette/Palette'
 import ToolPalette from '@components/ToolPalette/ToolPalette'
 import PixelCanvas from '@components/PixelCanvas/PixelCanvas'
 import Dimensions from '@components/Dimensions/Dimensions'
-import Menu from '@components/Menu/Menu'
+import NewProject from '@components/NewProject/NewProject'
+import LoadSave from '@components/LoadSave/LoadSave'
+import UndoRedo from '@components/UndoRedo/UndoRedo'
+
 function App() {
   return (
       <div className="App">
@@ -18,7 +21,13 @@ function App() {
             <div className="row">
               <div className="col-md-6">
                 <div className="app-module">
-                  <Menu/>
+                  <NewProject/>
+                </div>
+                <div className="app-module">
+                  <LoadSave/>
+                </div>
+                <div className="app-module">
+                  <UndoRedo/>
                 </div>
                 <div className="app-module">
                   <ToolPalette/>
