@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
 // import PixelItem from './PixelItem'
-import {setColor, fillColor, move, addHistory} from '@store/modules/pixelCanvas'
+import {initCanvas, setColor, fillColor, move, addHistory} from '@store/modules/pixelCanvas'
 import {setCurrentColorIndex} from '@store/modules/currentColorIndex'
 import {setCurrentToolState} from '@store/modules/toolStatus.js'
 import {changeColor} from '@store/modules/colorList.js'
@@ -13,7 +13,8 @@ import {changeColor} from '@store/modules/colorList.js'
     colLength: state.pixelCanvas.present.colLength,
     canvas: state.pixelCanvas.present.canvas,
     colorList: state.colorList,
-    currentColorIndex: state.currentColorIndex
+    currentColorIndex: state.currentColorIndex,
+    storage: state.storage
   })
 )
 class pixelCanvas extends Component{
@@ -24,6 +25,11 @@ class pixelCanvas extends Component{
     this.startY = 0
     this.fillColor = this.fillColor.bind(this)
     // 初始化历史记录
+    const storage = props.storage
+    console.log(storage);
+    if(storage.current >= 0) {
+      props.dispatch(initCanvas(storage.store[storage.current]))
+    }
   }
   render() {
     const cursorDict = {

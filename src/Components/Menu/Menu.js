@@ -1,11 +1,12 @@
 import {Component} from 'react'
 import store from '@store/store';
 import {newCanvas, undo, redo} from '@store/modules/pixelCanvas'
+import {save} from '@store/modules/storage'
 import {connect} from 'react-redux';
 
 @connect(
   state => ({
-    pixelCanvas: state.pixelCanvas,
+    pixelCanvas: state.pixelCanvas
   })
 )
 class Menu extends Component {
@@ -17,10 +18,10 @@ class Menu extends Component {
           <button className="button" onClick={()=> {this.newCancal()}}>新建</button>
         </div>
         <div className="col-md-6">
-          <button className="button">加载</button>
+          <button className="button" >加载</button>
         </div>
         <div className="col-md-6">
-          <button className="button">保存</button>
+          <button className="button" onClick={()=> {this.save()}}>保存</button>
         </div>
         <div className="col-md-6">
           <button className="button" disabled={past.length === 0} onClick={()=> this.undo()}>撤销</button>
@@ -51,6 +52,10 @@ class Menu extends Component {
    */
   redo() {
     this.props.dispatch(redo())
+  }
+  // 保存
+  save() {
+    this.props.dispatch(save(this.props.pixelCanvas.present))
   }
 }
 

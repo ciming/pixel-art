@@ -25,6 +25,12 @@ initialState.present.canvas = renderCanvas(initialState.present.rowLength, initi
 export default function reducer(state = initialState, action = {}) {
   const { past, present, future } = state
   switch (action.type) {
+    case 'INIT_CANVAS':
+      return {
+        past: [],
+        present: action.data,
+        future: []
+      }
     case 'NEW_CANVAS': 
       return {
         past: [],
@@ -234,6 +240,13 @@ export const changeRowSize = (type) => {
         canvas: canvasClone
       }
     }
+  }
+}
+
+export const initCanvas = (data) => {
+  return {
+    type: 'INIT_CANVAS',
+    data
   }
 }
 
