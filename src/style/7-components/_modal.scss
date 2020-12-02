@@ -1,0 +1,27 @@
+.ReactModal{
+  &__Content{
+  }
+  &__close{
+    appearance: none;
+    background-color: transparent;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  &__title{
+    text-align: left;
+    font-size: 1.5em;
+  }
+  &__footer{
+    text-align: center;
+    .button{
+      display: inline-block;
+      width: auto;
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+  }
+}
