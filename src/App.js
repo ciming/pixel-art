@@ -7,6 +7,7 @@ import Dimensions from '@components/Dimensions/Dimensions'
 import NewProject from '@components/NewProject/NewProject'
 import LoadSave from '@components/LoadSave/LoadSave'
 import UndoRedo from '@components/UndoRedo/UndoRedo'
+import PreviewBox from '@components/PreviewBox/PreviewBox'
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
           <div className="col-md-3 ">
             <div className="row end-md">
               <div className="col-md-6">
+                <div className="app-module">
+                  <PreviewBox/>
+                </div>
                 <div className="app-module">
                   <Dimensions/>
                 </div>

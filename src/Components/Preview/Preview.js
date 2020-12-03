@@ -20,7 +20,9 @@ class Preview extends Component {
   }
   updateCanvas() {
     const gridData = this.props.data.canvas
-    const ctx = this.canvasRef.current.getContext('2d');
+    const canvas = this.canvasRef.current
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     const baseSize = this.props.baseSize 
     gridData.forEach((rows, yIndex) => {
       rows.forEach((color, xIndex) => {

@@ -26,7 +26,6 @@ class pixelCanvas extends Component{
     this.fillColor = this.fillColor.bind(this)
     // 初始化历史记录
     const storage = props.storage
-    console.log(storage);
     if(storage.current >= 0) {
       props.dispatch(initCanvas(storage.store[storage.current]))
     }
