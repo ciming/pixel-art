@@ -8,6 +8,7 @@ import NewProject from '@components/NewProject/NewProject'
 import LoadSave from '@components/LoadSave/LoadSave'
 import UndoRedo from '@components/UndoRedo/UndoRedo'
 import PreviewBox from '@components/PreviewBox/PreviewBox'
+import Export from '@components/Export/Export'
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
                 </div>
                 <div className="app-module">
                   <Platette/>
+                </div>
+                <div className="app-module">
+                  <Export/>
                 </div>
               </div>
             </div>

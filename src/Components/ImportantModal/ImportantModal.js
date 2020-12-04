@@ -12,9 +12,10 @@ class ImportantModal extends Component{
     this.state = {
       visible: false
     }
+    Modal.setAppElement('#root')
   }
   render() {
-    Modal.setAppElement('#root')
+    
     return(
       <Modal
           isOpen={this.state.visible}
