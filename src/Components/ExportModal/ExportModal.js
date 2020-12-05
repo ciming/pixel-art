@@ -32,7 +32,7 @@ class ExportModal extends Component{
           <span>导出</span>
         </div>
         <div className="tab">
-          <div class="tab__list">
+          <div className="tab__list">
             <div className={itemClass('download')} onClick={() => {this.setState({tab: 'download'})}}>
               下载
             </div>
@@ -40,7 +40,7 @@ class ExportModal extends Component{
               导出配置
             </div>
           </div>
-          <div class="tab__content">
+          <div className="tab__content">
             {currentTab === 'download' ? <Download/> : <ExportConfig/>}
           </div>
         </div>

@@ -1,0 +1,9 @@
+.download{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .button{
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}

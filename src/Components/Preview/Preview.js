@@ -29,9 +29,13 @@ class Preview extends Component {
         if(color) {
           ctx.fillStyle = color
           ctx.fillRect(xIndex * baseSize,yIndex * baseSize, baseSize, baseSize);
+          
         }
       });
     });
+  }
+  getsAsPNG() {
+    return this.canvasRef.current.toDataURL("image/png");
   }
 }
 
