@@ -1,0 +1,17 @@
+.import-config{
+  &__input{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1em;
+  }
+  &__btn{
+    text-align: center;
+    .button{
+      display: inline-block;
+      width: auto;
+      padding-left: 1em;
+      padding-right: 1em;;
+    }
+  }
+}

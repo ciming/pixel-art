@@ -1,21 +1,25 @@
 import {Component} from 'react'
-import {connect} from 'react-redux';
 import Modal from 'react-modal';
-import Preview from '@components/Preview/Preview'
-import Store from '@store/store'
-import {initCanvas} from '@store/modules/pixelCanvas'
-import {deleteRecord} from '@store/modules/storage'
-import Icon from '@components/Icon/Icon'
+import classnames from 'classnames'
+import ImportLocal from './ImportLocal'
+import ImportConfig from './ImportConfig'
 class ImportantModal extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      visible: false
+      visible: false,
+      tab: 'local'
     }
     Modal.setAppElement('#root')
   }
   render() {
-    
+    const currentTab = this.state.tab
+    const itemClass = (code) => {
+      return classnames({
+        'tab__item': true,
+        'is-active':currentTab === code
+      })
+    }
     return(
       <Modal
           isOpen={this.state.visible}
@@ -26,24 +30,19 @@ class ImportantModal extends Component{
         <div className="ReactModal__title">
           <span>加载</span>
         </div>
-        <div className="import-pixel">
-          {
-            this.props.storage.store.map((item, index) => {
-              return (
-                <div className="import-pixel__item"  key={index} onClick={() => {this.select(item)}}>
-                  <Preview data={item} />
-                  <div className="import-pixel__del" onClick={(e) => {
-                    e.stopPropagation()
-                    this.delete(index)
-                  }}>
-                    <Icon icon="remove"/>
-                  </div>
-                </div>
-              )
-            })
-          }
-          
+        <div className="tab">
+        <div className="tab__list">
+          <div className={itemClass('local')} onClick={() => {this.setState({tab: 'local'})}}>
+            本地
+          </div>
+          <div className={itemClass('config')} onClick={() => {this.setState({tab: 'config'})}}>
+            导入配置
+          </div>
         </div>
+        <div className="tab__content">
+            {currentTab === 'local' ? <ImportLocal onClose={()=> {this.close()}}/> : <ImportConfig onClose={()=> {this.close()}}/>}
+          </div>
+      </div>
       </Modal>
     )
   }
@@ -58,22 +57,7 @@ class ImportantModal extends Component{
       visible: false
     })
   }
-  /**
-   * 选择保存的像素画
-   * @author 徐步星 <869313979@qq.com>
-   * @time 2020年12月02日 09:22:14 星期三
-   * @param {Object} data - 参数
-   */
-  select(data) {
-    Store.dispatch(initCanvas(data))
-    this.close()
-  }
-  // 删除记录
-  delete(index) {
-    Store.dispatch(deleteRecord(index))
-  }
+  
 }
 
-export default connect(state=> ({
-  storage: state.storage
-}), null, null, { forwardRef: true })(ImportantModal);
+export default ImportantModal

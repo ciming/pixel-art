@@ -13,7 +13,7 @@ const initialState = {
 const renderCanvas = (rowLength, colLength) => {
   const canvas = []
   for(let i = 0; i < rowLength; i ++) {
-    canvas.push(Array(colLength).fill(null))
+    canvas.push(Array(colLength).fill(''))
   }
   return canvas
 }
@@ -197,7 +197,7 @@ export const changeColSize = (type) => {
         colLength += 1
         for (let i = 0; i < canvasClone.length; i++) {
           const innerArray = canvasClone[i];
-          innerArray.push(null)
+          innerArray.push('')
         }
       } else if(type === 'remove') {
         colLength -= 1
@@ -229,7 +229,7 @@ export const changeRowSize = (type) => {
       const canvasClone = clone2DArray(canvas)
       if(type === 'add') {
         rowLength += 1
-        canvasClone.push(Array(colLength).fill(null))
+        canvasClone.push(Array(colLength).fill(''))
       } else if(type === 'remove') {
         rowLength -= 1
         canvasClone.pop()

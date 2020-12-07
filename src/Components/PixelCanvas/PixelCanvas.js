@@ -72,7 +72,7 @@ class pixelCanvas extends Component{
     } else if(this.props.toolStatus === 'eraser') {
       this.props.dispatch(addHistory(this.props.pixelCanvas))
       this.clearColor(x, y)
-    } else if(this.props.toolStatus === 'eyedropper' & color !== null) {
+    } else if(this.props.toolStatus === 'eyedropper' & color !== '') {
       this.absorbColor(color)
     } else if(this.props.toolStatus === 'move') {
       this.props.dispatch(addHistory(this.props.pixelCanvas))
@@ -125,7 +125,7 @@ class pixelCanvas extends Component{
       this.props.dispatch(setCurrentColorIndex(this.props.colorList.length - 1))
       this.props.dispatch(changeColor(this.props.colorList.length - 1, color))
     }
-    this.props.dispatch(setCurrentToolState(null))
+    this.props.dispatch(setCurrentToolState(''))
     
   }
   /**
