@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 @connect(
   state => ({
     pixelCanvas: state.pixelCanvas.present,
+    pixelSize: state.pixelSize
   })
 )
 class Download extends Component{
@@ -16,7 +17,7 @@ class Download extends Component{
     return (
       <div className="download mt20">
         <div className="download__preview">
-          <Preview data={this.props.pixelCanvas} ref={this.previewRef}/>
+          <Preview data={this.props.pixelCanvas} size={this.props.pixelSize} ref={this.previewRef}/>
         </div>
         <div className="download__btn  mt20">
           <button className="button" onClick={() => {this.downLoad()}}>

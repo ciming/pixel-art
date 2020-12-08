@@ -1,0 +1,25 @@
+.input{
+  border: 3px solid #757575;
+  background-color: #313131;
+  color: #bbb;
+  text-align: center;
+  &__label{
+    display: block;
+    padding: .5em 0;
+  }
+  &__control{
+    appearance: none;
+    box-shadow: none;
+    border-radius: none;
+    text-align: center;
+    font-size: 1em;
+    color: #bbb;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #4b4949;
+    transition: background-color 0.3s;
+    outline: none;
+    padding: .5em 0;
+  }
+}

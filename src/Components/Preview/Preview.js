@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 class Preview extends Component {
   static defaultProps = {
-    baseSize: 5
+    size: 5
   }
   constructor(props) {
     super(props)
@@ -10,9 +10,9 @@ class Preview extends Component {
   }
   render() {
     const {colLength, rowLength} = this.props.data
-    const baseSize = this.props.baseSize 
+    const size = this.props.size 
     return (
-      <canvas ref={this.canvasRef} width={baseSize * colLength} height={baseSize * rowLength}></canvas>
+      <canvas ref={this.canvasRef} width={size * colLength} height={size * rowLength}></canvas>
     )
   }
   componentDidMount() {
@@ -23,12 +23,12 @@ class Preview extends Component {
     const canvas = this.canvasRef.current
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const baseSize = this.props.baseSize 
+    const size = this.props.size 
     gridData.forEach((rows, yIndex) => {
       rows.forEach((color, xIndex) => {
         if(color) {
           ctx.fillStyle = color
-          ctx.fillRect(xIndex * baseSize,yIndex * baseSize, baseSize, baseSize);
+          ctx.fillRect(xIndex * size,yIndex * size, size, size);
           
         }
       });

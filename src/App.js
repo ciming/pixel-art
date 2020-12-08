@@ -9,6 +9,7 @@ import LoadSave from '@components/LoadSave/LoadSave'
 import UndoRedo from '@components/UndoRedo/UndoRedo'
 import PreviewBox from '@components/PreviewBox/PreviewBox'
 import Export from '@components/Export/Export'
+import PixelSize from '@components/PixelSize/PixelSize'
 
 function App() {
   return (
@@ -55,6 +56,9 @@ function App() {
                 </div>
                 <div className="app-module">
                   <Dimensions/>
+                </div>
+                <div className="app-module">
+                  <PixelSize/>
                 </div>
               </div>
             </div>
