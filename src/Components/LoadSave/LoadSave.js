@@ -19,14 +19,14 @@ class LoadSave extends Component {
   render() {
     return(
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 col-xs-6">
           <button className="button" onClick={() => {
             this.modalRef.current.open()
           }}>加载</button>
           <ImportantModal ref={this.modalRef}>
           </ImportantModal>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 col-xs-6">
           <button className="button" onClick={()=> {this.save()}}>保存</button>
         </div>
       </div>

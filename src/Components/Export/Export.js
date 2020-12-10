@@ -11,7 +11,7 @@ class Export extends Component{
   render() {
     return (
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-12 col-xs-12">
           <button className="button" onClick={() => {
             this.modalRef.current.open()
           }}>导出</button>

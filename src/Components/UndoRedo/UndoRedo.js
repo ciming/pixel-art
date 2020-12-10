@@ -11,10 +11,10 @@ class UndoRedo extends Component {
     const {past, future} = this.props.pixelCanvas
     return(
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 col-xs-6">
           <button className="button" disabled={past.length === 0} onClick={()=> this.undo()}>撤销</button>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 col-xs-6">
           <button className="button" disabled={future.length === 0} onClick={()=> this.redo()}>重做</button>
         </div>
       </div>

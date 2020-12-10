@@ -6,7 +6,7 @@ class NewProject extends Component {
   render() {
     return(
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-12 col-xs-12">
           <button className="button" onClick={()=> {this.newCancal()}}>新建</button>
         </div>
       </div>
