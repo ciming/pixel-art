@@ -24,6 +24,7 @@ class pixelCanvas extends Component{
     this.startX = 0
     this.startY = 0
     this.fillColor = this.fillColor.bind(this)
+    this.touchElemtnt = null
     // 初始化历史记录
     const storage = props.storage
     if(storage.current >= 0) {
@@ -49,10 +50,28 @@ class pixelCanvas extends Component{
               return (
                 <div 
                   className="pixel-canvas__item" 
-                  key={`${xIndex}-${yIndex}`}  
-                  style={{backgroundColor: color || 'rgb(49, 49, 49)'}}
+                  key={`${xIndex}-${yIndex}`}
+                  data-x={xIndex}
+                  data-y={yIndex}
+                  style={{backgroundColor: color || 'rgb(49, 49, 49)', touchAction: 'none'}}
+                  onTouchStart={(evt) => {
+                    this.onMouseDown(xIndex, yIndex, color)}
+                  }
                   onMouseDown={() => {this.onMouseDown(xIndex, yIndex, color)}}
-                  onMouseEnter={() => {this.onMouseEnter(xIndex, yIndex, color)}}
+                  onTouchMove={(evt) => {
+                    const myLocation = evt.changedTouches[0]
+                    const realTarget = document.elementFromPoint(myLocation.clientX, myLocation.clientY)
+                    if(this.touchElemtnt !== realTarget) {
+                      this.touchElemtnt = realTarget
+                      const {x, y} = realTarget.dataset
+                      this.onMouseEnter(Number(x), Number(y))
+                    } 
+                  }}
+                  onMouseEnter={() => {this.onMouseEnter(xIndex, yIndex)}}
+                  onTouchEnd={() => {
+                    this.touchElemtnt = null
+                    this.onMouseEnter(xIndex, yIndex)
+                  }}
                   onMouseUp={() => {this.onMouseUp()}}
                   >
                 </div>
