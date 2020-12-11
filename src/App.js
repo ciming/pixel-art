@@ -10,6 +10,7 @@ import UndoRedo from '@components/UndoRedo/UndoRedo'
 import PreviewBox from '@components/PreviewBox/PreviewBox'
 import Export from '@components/Export/Export'
 import PixelSize from '@components/PixelSize/PixelSize'
+import Help from '@components/Help/Help'
 
 function App() {
   return (
@@ -52,7 +53,11 @@ function App() {
                   <Platette/>
                 </div>
               </div>
-              
+              <div className="col-md-12 col-xs-6">
+                <div className="app-module">
+                  <Help/>
+                </div>
+              </div>
             </div>
             
           </div>

@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
-import ExportModal from '@components/ExportModal/ExportModal'
+import HelpModal from './HelpModal'
 
-class Export extends Component{
+class Help extends Component{
   constructor(props) {
     super(props)
+    this.state = {
+    }
     this.modalRef = React.createRef();
   }
   render() {
@@ -12,11 +14,12 @@ class Export extends Component{
         <div className="col-md-12 col-xs-12">
           <button className="button" onClick={() => {
             this.modalRef.current.open()
-          }}>导出</button>
-          <ExportModal ref={this.modalRef}/>
+          }}>快捷键</button>
+          <HelpModal ref={this.modalRef}/>
         </div>
       </div>
     )
   }
 }
-export default Export
+
+export default Help 

@@ -2,7 +2,8 @@
 
 @import './4-generic/normalize';
 
-@import './5-elements/icon';
+@import './5-elements/icon',
+  './5-elements/kbd';
 
 @import './6-skeleton/flexboxgrid',
 './6-skeleton/module';
@@ -21,7 +22,8 @@
   './7-components/download',
   './7-components/export-config',
   './7-components/import-config',
-  './7-components/input';
+  './7-components/input',
+  './7-components/hot-key';
 
 @import './8-Utilities/visible.scss',
   './8-Utilities/margin.scss';
