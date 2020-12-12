@@ -8,11 +8,6 @@ import hotkeys from 'hotkeys-js';
   })
 )
 class UndoRedo extends Component {
-  constructor(props) {
-    console.log(111);
-    super(props)
-    
-  }
   componentDidMount() {
     // 撤销
     hotkeys('ctrl+z', (e, handler) => {

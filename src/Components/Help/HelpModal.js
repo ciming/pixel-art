@@ -43,6 +43,49 @@ class ExportModal extends Component{
               </span>
             </div>
           </div>
+          <h2 class="hot-key__title">工具</h2>
+          <div class="hot-key__list">
+            <div class="hot-key__item">
+              <span>
+                填充
+              </span>
+              <span>
+                <kbd>f</kbd>
+              </span>
+            </div>
+            <div class="hot-key__item">
+              <span>
+                吸管
+              </span>
+              <span>
+                <kbd>e</kbd>
+              </span>
+            </div>
+            <div class="hot-key__item">
+              <span>
+                颜色选择
+              </span>
+              <span>
+                <kbd>p</kbd>
+              </span>
+            </div>
+            <div class="hot-key__item">
+              <span>
+                橡皮擦
+              </span>
+              <span>
+                <kbd>D</kbd>
+              </span>
+            </div>
+            <div class="hot-key__item">
+              <span>
+                移动
+              </span>
+              <span>
+                <kbd>m</kbd>
+              </span>
+            </div>
+          </div>
         </div>
       </Modal>
     )

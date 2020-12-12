@@ -4,6 +4,7 @@ import ColorPicker from './ColorPicker'
 import classnames from 'classnames'
 import Icon from '@components/Icon/Icon'
 import {setCurrentToolState} from '@store/modules/toolStatus.js'
+import hotkeys from 'hotkeys-js';
 
 @connect(
   state => ({
@@ -16,6 +17,23 @@ class ToolPaletee extends Component {
     this.myRef = createRef();
     this.handleOutsideClick = this.handleOutsideClick.bind(this)
     this.state = {};
+  }
+  componentDidMount() {
+    hotkeys('f', (e) => {
+      this.changeToolStatus('fill')
+    })
+    hotkeys('e', (e) => {
+      this.changeToolStatus('eyedropper')
+    })
+    hotkeys('d', (e) => {
+      this.changeToolStatus('eraser')
+    })
+    hotkeys('m', (e) => {
+      this.changeToolStatus('move')
+    })
+    hotkeys('p', (e) => {
+      this.changeToolStatus('color-picker')
+    })
   }
   render() {
     const itemClass = (code) => {
